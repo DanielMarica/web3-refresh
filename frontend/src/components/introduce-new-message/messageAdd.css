@@ -1,0 +1,99 @@
+.message-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.message-form h3 {
+  margin-top: 0;
+}
+
+.message-form div {
+  margin-bottom: 15px;
+}
+
+.message-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.message-form select,
+.message-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.message-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.message-form button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.message-form button:hover {
+  background-color: #0b7dda;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Message List Styles */
+.message-list {
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.message-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #ccc;
+}
+
+.message-item.alice {
+  background-color: #e3f2fd;
+  border-left-color: #2196F3;
+}
+
+.message-item.bob {
+  background-color: #f3e5f5;
+  border-left-color: #9c27b0;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.message-time {
+  color: #666;
+  font-size: 12px;
+}
+
+.message-content {
+  color: #333;
+  line-height: 1.5;
+}

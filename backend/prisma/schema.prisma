@@ -21,3 +21,10 @@ model Expense {
   payer       String
   amount      Float
 }
+
+model Message{
+  id   Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  author String
+  content String
+}

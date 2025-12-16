@@ -7,6 +7,7 @@ export const expenseSchema = z.object({
     .max(200, 'Description must be less than 200 characters'),
   
   payer: z
+    // as const because enum must be imuable so we must have this two values 
     .enum(['Alice', 'Bob'] as const, {
       error: 'Payer must be either Alice or Bob',
     }),
