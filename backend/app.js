@@ -17,11 +17,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ['http://localhost:5173'],
-  })
-);
+
 
 
 app.use('/api/expenses', expensesRouter);
