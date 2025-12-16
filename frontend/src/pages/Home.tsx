@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import ExpenseItem from '../components/ExpenseItem';
-import ExpenseAdd from '../components/ExpenseAdd';
-import ExpenseSorter from '../components/ExpenseSorter';
+import ExpenseItem from '../components/introduce-new-expense/ExpenseItem';
+import ExpenseAdd from '../components/introduce-new-expense/ExpenseAdd';
+import ExpenseSorter from '../components/introduce-new-expense/ExpenseSorter';
 import type { Expense } from '../types/Expense';
 
 export default function Home() {
