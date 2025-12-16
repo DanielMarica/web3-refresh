@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const expensesService = require('../services/expenses.js');
+//Common status codes:
+// 200 = OK (success)
+// 201 = Created (success for POST)
+// 400 = Bad Request (invalid data)
+// 404 = Not Found
+// 500 = Internal Server Error
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const expenses = expensesService.getAllExpenses();
+    const expenses = await expensesService.getAllExpenses();
     res.json(expenses);
   } catch (error) {
     console.error('Error retrieving expenses:', error);
@@ -12,17 +18,16 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newExpense = {
-      id: Date.now().toString(),
       date: req.body.date,
       description: req.body.description,
       payer: req.body.payer,
       amount: parseFloat(req.body.amount),
     };
 
-    const addedExpense = expensesService.addExpense(newExpense);
+    const addedExpense = await expensesService.addExpense(newExpense);
     res.status(201).json(addedExpense);
   } catch (error) {
     console.error('Error adding expense:', error);
@@ -30,9 +35,9 @@ router.post('/', (req, res) => {
   }
 });
 
-router.post('/reset', (req, res) => {
+router.post('/reset', async (req, res) => {
   try {
-    const resetData = expensesService.resetExpenses();
+    const resetData = await expensesService.resetExpenses();
     res.json({
       message: 'Expenses reset successfully',
       data: resetData,

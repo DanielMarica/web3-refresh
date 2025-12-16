@@ -6,7 +6,8 @@ var cors = require('cors');
 var expensesRouter = require('./routes/expenses.js');
 
 var app = express();
-
+///Summary: CORS must be configured early (near the top), 
+// but only once. 
 app.use(
   cors({
     origin: ['http://localhost:5173', /\.onrender\.com$/],
