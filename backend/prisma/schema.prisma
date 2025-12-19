@@ -15,11 +15,16 @@ datasource db {
 }
 
 model Expense {
-  id          Int      @id @default(autoincrement())
-  date        DateTime @default(now())
-  description String
-  payer       String
-  amount      Float
+  id           Int      @id @default(autoincrement())
+  description  String
+  amount       Float
+  date         DateTime @default(now())
+  
+  // Relations
+  payer        User     @relation("PayerExpenses", fields: [payerId], references: [id])
+  payerId      Int
+  
+  participants User[]   @relation("ParticipantExpenses")
 }
 
 model Message{
@@ -27,4 +32,29 @@ model Message{
   createdAt DateTime @default(now())
   author String
   content String
+}
+
+model User {
+  id               Int        @id @default(autoincrement())
+  name             String
+  email            String     @unique
+  bankAccount      String?    // Optionnel
+  
+  // Relations
+  paidExpenses             Expense[]  @relation("PayerExpenses")
+  participatedExpenses     Expense[]  @relation("ParticipantExpenses")
+  transfersOut             Transfer[] @relation("UserTransfersSource") // relation c'est quoi ? 
+  transfersIn              Transfer[] @relation("UserTransfersTarget")
+}
+
+model Transfer {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  date      DateTime @default(now())
+  
+  source    User     @relation("UserTransfersSource", fields: [sourceId], references: [id])
+  sourceId  Int
+  
+  target    User     @relation("UserTransfersTarget", fields: [targetId], references: [id])
+  targetId  Int
 }

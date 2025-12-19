@@ -1,22 +1,21 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Welcome from './pages/Welcome';
 import Home from './pages/Home';
 import Messages from './pages/Messages';
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <Link to="/">Home (Expenses)</Link> | <Link to="/messages">Messages</Link>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
+      <Routes>
+        {/* Layout = route parent (pas de path) */}
+        <Route element={<Layout />}>
+          {/* Routes enfants qui s'affichent dans <Outlet /> */}
+          <Route index element={<Welcome />} />
+          <Route path="/expenses" element={<Home />} />
           <Route path="/messages" element={<Messages />} />
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </Router>
   );
 }
-
-export default App;
