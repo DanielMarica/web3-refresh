@@ -1,7 +1,11 @@
+import type { User } from "./User";
+
 export interface Expense {
-  id: string;
-  date: string;
+  id: number;
   description: string;
-  payer: string;
   amount: number;
+  date: string;
+  payerId: number;
+  payer: User;
+  participants: User[];
 }

@@ -1,0 +1,87 @@
+@hostname = localhost:3000
+@contentType = application/json
+
+# ==========================================
+# 1. 👤 UTILISATEURS (Users)
+# ==========================================
+GET http://localhost:3000/api/users
+Content-Type: {{contentType}}
+### 1.1 Récupérer tous les utilisateurs
+# Permet de vérifier les IDs disponibles (ex: Alice=1, Bob=2) pour les utiliser ensuite.
+GET http://{{hostname}}/api/users
+Content-Type: {{contentType}}
+
+
+# ==========================================
+# 2. 💸 DÉPENSES (Expenses)
+# ==========================================
+
+### 2.1 Récupérer toutes les dépenses
+# Doit afficher les dépenses avec le détail du payeur et des participants.
+GET http://{{hostname}}/api/expenses
+Content-Type: {{contentType}}
+
+### 2.2 Récupérer une dépense précise par son ID
+# Remplace '1' par un ID existant dans ta base.
+GET http://{{hostname}}/api/expenses/22
+Content-Type: {{contentType}}
+
+### 2.3 Créer une nouvelle dépense (Cas standard)
+# Alice (id: 1) paie 45.99 pour elle et Bob (id: 2).
+POST http://{{hostname}}/api/expenses
+Content-Type: {{contentType}}
+
+{
+  "description": "Courses au supermarché",
+  "amount": 45.99,
+  "date": "2025-10-27T10:00:00.000Z",
+  "payerId": 3,
+  "participantIds": [3, 4]
+}
+
+### 2.4 Créer une dépense (Erreur attendue : ID invalide)
+# Teste la robustesse : On essaie avec un utilisateur #99 qui n'existe pas.
+# Le serveur doit renvoyer une erreur (500 ou 400 selon ta gestion d'erreur).
+POST http://{{hostname}}/api/expenses
+Content-Type: {{contentType}}
+
+{
+  "description": "Erreur Test",
+  "amount": 10.00,
+  "payerId": 99,
+  "participantIds": [1]
+}
+
+
+# ==========================================
+# 3. 🔄 VIREMENTS (Transfers)
+# ==========================================
+
+### 3.1 Récupérer tous les virements
+GET http://{{hostname}}/api/transfers
+Content-Type: {{contentType}}
+
+### 3.2 Créer un nouveau virement
+# Alice (id: 1) rembourse 20.00 à Bob (id: 2).
+POST http://{{hostname}}/api/transfers
+Content-Type: {{contentType}}
+
+{
+  "amount": 20.00,
+  "date": "2025-10-28T14:30:00.000Z",
+  "sourceId": 4,
+  "targetId": 3
+}
+
+
+# ==========================================
+# 4. 📜 TRANSACTIONS (Le final)
+# ==========================================
+
+### 4.1 Récupérer l'historique complet (Mixte)
+# C'est la route la plus importante pour le Frontend.
+# Vérifie que tu reçois bien une liste contenant à la fois :
+# - des objets avec "kind": "expense"
+# - des objets avec "kind": "transfer"
+GET http://{{hostname}}/api/transactions
+Content-Type: {{contentType}}
